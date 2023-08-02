@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="danhlc_SA_Project" Class="MyDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sql.bsite.net\MSSQL2016;Initial Catalog=danhlc_SA_Project;User ID=danhlc_SA_Project" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="danhlc_SA_ProjectConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.customer" Member="customers">
+    <Type Name="customer">
+      <Column Name="CusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CusName" Type="System.String" DbType="NVarChar(299) NOT NULL" CanBeNull="false" />
+      <Column Name="BDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(299) NOT NULL" CanBeNull="false" />
+      <Association Name="customer_reservation" Member="reservations" ThisKey="CusID" OtherKey="CusID" Type="reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.department" Member="departments">
+    <Type Name="department">
+      <Column Name="DepID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DepName" Type="System.String" DbType="NVarChar(299) NOT NULL" CanBeNull="false" />
+      <Association Name="department_reservation" Member="reservations" ThisKey="DepID" OtherKey="DepID" Type="reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.reservation" Member="reservations">
+    <Type Name="reservation">
+      <Column Name="ResID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DateRes" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(399) NOT NULL" CanBeNull="false" />
+      <Column Name="CusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DepID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="customer_reservation" Member="customer" ThisKey="CusID" OtherKey="CusID" Type="customer" IsForeignKey="true" />
+      <Association Name="department_reservation" Member="department" ThisKey="DepID" OtherKey="DepID" Type="department" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
